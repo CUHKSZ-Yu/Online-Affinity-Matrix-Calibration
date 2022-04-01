@@ -28,7 +28,7 @@ fprintf('\nMLJ special issue 2022 submission "Online Affinity Matrix Calibration
 fprintf('\nDemo: prediction task in Section 6.3\n');
 
 %% Prediction Task
-for j = 1:5
+for j = 1:length(density_list)
     fprintf('\nIters = %1.0f: ', j);
     Xmiss = X_list{j};
     density = density_list(j);
@@ -78,7 +78,7 @@ for j = 1:5
 
     % ====================== OAMC-DMC Calibration =====================
     fprintf('OAMC-DMC, '); 
-    [Joamcd, ~] = calibrate_oamc(Jmiss, noff, non);
+    Joamcd = calibrate_oamc_block(Jmiss, noff, non, 'dmc', 5);
     accuracy(j,9) = predict_smoke(Joamcd, Y);
 
     fprintf('finished.');
